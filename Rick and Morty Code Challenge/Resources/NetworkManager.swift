@@ -2,11 +2,10 @@
 //  NetworkManager.swift
 //  Rick and Morty Code Challenge
 //
-//  Created by Cristian Tejeda on 2/5/25.
+//  Created by Cristian Perez on 2/5/25.
 //
 import Foundation
 
-// NetworkManager.swift
 class NetworkManager {
     static let shared = NetworkManager()
     
@@ -33,3 +32,22 @@ class NetworkManager {
     }
 }
 
+protocol NetworkService {
+    func fetchCharacters(name: String) async throws -> [Character]
+}
+
+extension NetworkManager: NetworkService {}
+
+class MockNetworkService: NetworkService {
+    var result: Result<[Character], Error> = .success([])
+    
+    func fetchCharacters(name: String) async throws -> [Character] {
+        try result.get()
+    }
+}
+
+#if DEBUG
+extension URLError {
+    static let mock = URLError(.notConnectedToInternet)
+}
+#endif

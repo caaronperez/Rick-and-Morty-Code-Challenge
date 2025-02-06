@@ -2,7 +2,7 @@
 //  CharacterDetailView.swift
 //  Rick and Morty Code Challenge
 //
-//  Created by Cristian Tejeda on 2/5/25.
+//  Created by Cristian Perez on 2/5/25.
 //
 import SwiftUI
 
