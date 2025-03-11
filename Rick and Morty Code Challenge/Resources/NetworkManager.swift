@@ -6,7 +6,11 @@
 //
 import Foundation
 
-class NetworkManager {
+protocol NetworkService {
+    func fetchCharacters(name: String) async throws -> [Character]
+}
+
+class NetworkManager: NetworkService {
     static let shared = NetworkManager()
     
     func fetchCharacters(name: String) async throws -> [Character] {
@@ -31,12 +35,6 @@ class NetworkManager {
         }
     }
 }
-
-protocol NetworkService {
-    func fetchCharacters(name: String) async throws -> [Character]
-}
-
-extension NetworkManager: NetworkService {}
 
 class MockNetworkService: NetworkService {
     var result: Result<[Character], Error> = .success([])
